@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "uri": "/greet"
+  },
+  "response": {
+    "status": 200,
+    "payload": {
+      "person": "Stranger",
+      "message": "Hello, Stranger!"
+    }
+  }
+}

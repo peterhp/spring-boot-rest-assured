@@ -1,0 +1,17 @@
+{
+  "request": {
+    "method": "GET",
+    "uri": "/greet",
+    "queryParams": {
+      "person": "Sora"
+    }
+  },
+  "response": {
+    "status": 200,
+    "strict": true,
+    "payload": {
+      "person": "Sora",
+      "message": "Hello, Sora!"
+    }
+  }
+}

@@ -1,5 +1,6 @@
 package demo.controller;
 
+import demo.controller.dto.MessageDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class GreetController {
 
     @RequestMapping(value = "/greet", method = RequestMethod.GET)
-    public ResponseEntity<String> greet(@RequestParam(defaultValue = "Stranger") String person) {
-        return ResponseEntity.ok(String.format("Hello, %s!", person));
+    public ResponseEntity<MessageDto> greet(@RequestParam(defaultValue = "Stranger") String person) {
+        return ResponseEntity.ok(new MessageDto(person, String.format("Hello, %s!", person)));
     }
 }

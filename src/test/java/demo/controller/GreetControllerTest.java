@@ -1,35 +1,29 @@
 package demo.controller;
 
+import demo.controller.dto.MessageDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
+import org.mockito.InjectMocks;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.http.ResponseEntity;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
-@RunWith(SpringRunner.class)
-@WebMvcTest(GreetController.class)
+@RunWith(MockitoJUnitRunner.class)
 public class GreetControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+    @InjectMocks
+    private GreetController controller;
 
     @Test
     public void shouldSayHelloToPerson() throws Exception {
-        mockMvc.perform(get("/greet")
-                .param("person", "Sora"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("Hello, Sora!"));
-    }
+        ResponseEntity<MessageDto> response = controller.greet("Sora");
 
-    @Test
-    public void shouldSayHelloToStranger() throws Exception {
-        mockMvc.perform(get("/greet"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("Hello, Stranger!"));
+        assertThat(response.getStatusCodeValue(), is(200));
+
+        MessageDto message = response.getBody();
+        assertThat(message.getPerson(), is("Sora"));
+        assertThat(message.getMessage(), is("Hello, Sora!"));
     }
 }
