@@ -18,7 +18,7 @@ public abstract class SpringBootTestConfig {
     }
 
     private void configRestAssured() {
-        RestAssured.baseURI = "http://localhost";
+        RestAssured.baseURI = "https://localhost";
         RestAssured.port = 8000;
         RestAssured.basePath = "/api";
         RestAssured.requestSpecification = given();
